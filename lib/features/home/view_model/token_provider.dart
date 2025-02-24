@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:nomotiwa/core/strings/strings.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class TokenProvider extends ChangeNotifier {
@@ -14,7 +14,7 @@ class TokenProvider extends ChangeNotifier {
   }
 
   void _initSocket() {
-    socket = IO.io("https://nomotiwa-backend.onrender.com", <String, dynamic>{
+    socket = IO.io(baseUrl, <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });

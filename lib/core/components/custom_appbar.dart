@@ -1,7 +1,4 @@
-
-
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:nomotiwa/core/constants/app_theme/app_theme.dart';
 import 'package:nomotiwa/core/constants/spaces/space.dart';
@@ -17,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.action,
     this.widget,
-    this.backButtonNeeded =true
+    this.backButtonNeeded = true,
   });
   @override
   Size get preferredSize => Size.fromHeight(kToolbarHeight);
@@ -70,24 +67,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                     if(backButtonNeeded) InkWell(
-                        onTap: action,
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.whiteColor,
-                          size: 20,
+                      if (backButtonNeeded)
+                        InkWell(
+                          onTap: action,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: MyColors.whiteColor,
+                            size: 20,
+                          ),
                         ),
-                      ),
                       Space.wSpace10,
                       Text(
                         title,
-                        style: 
-                         TextStyle(
+                        style: TextStyle(
                           fontSize: 25,
-                            color: MyColors.whiteColor,
-                            letterSpacing: .5,
-                            fontWeight: FontWeight.w700,
-                      
+                          color: MyColors.whiteColor,
+                          letterSpacing: .5,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],

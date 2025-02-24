@@ -3,7 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:nomotiwa/core/screen_size/screen_size.dart';
 import 'package:nomotiwa/features/authentication/view/screen/login_screen.dart';
 import 'package:nomotiwa/features/authentication/view_model/otp_state_provider.dart';
-import 'package:nomotiwa/features/home/screens/home_screen.dart';
+import 'package:nomotiwa/features/home/view/screens/home_screen.dart';
 import 'package:nomotiwa/features/home/view_model/doctor_provider.dart';
 import 'package:provider/provider.dart';
 

@@ -1,14 +1,13 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:nomotiwa/core/strings/strings.dart';
 import 'package:nomotiwa/features/home/model/doctor_model.dart';
 
 
  class DoctorServices {
   Future<List<Doctor>> getDoctorByEmail(String email) async {
-      final url = 'https://nomotiwa-backend.onrender.com/api/user/getUser/$email';
-
- //   final url = 'http://localhost:8080/api/user/getUser/$email';
+      final url = '$baseUrl/api/user/getUser/$email';
     try {
       final response = await Dio().get(url);
       if (response.statusCode == 200) {
@@ -26,7 +25,6 @@ import 'package:nomotiwa/features/home/model/doctor_model.dart';
           log(doctors.toString());
           return doctors;
         } else {
-          // No appointments found; return an empty list
           return [];
         }
       } else {

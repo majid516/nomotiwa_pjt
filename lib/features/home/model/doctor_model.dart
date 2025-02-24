@@ -15,7 +15,6 @@ class Doctor {
     required this.v,
   });
 
-  // Existing constructor for full doctor JSON (if needed)
   factory Doctor.fromJson(Map<String, dynamic> json) {
     return Doctor(
       id: json["_id"],

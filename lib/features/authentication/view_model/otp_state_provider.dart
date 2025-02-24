@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:nomotiwa/core/strings/strings.dart';
+
 class OtpState extends ChangeNotifier {
   bool isOtpSent = false;
   bool isLoading = false;
@@ -17,7 +19,7 @@ class OtpState extends ChangeNotifier {
       notifyListeners();
 
       final response = await http.post(
-        Uri.parse('https://nomotiwa-backend.onrender.com/api/user/authanticate'),
+        Uri.parse('$baseUrl/api/user/authanticate'),
 
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'email': email}),
@@ -46,7 +48,7 @@ class OtpState extends ChangeNotifier {
       notifyListeners();
 
       final response = await http.post(
-        Uri.parse('https://nomotiwa-backend.onrender.com/api/user/verify-otp'),
+        Uri.parse('$baseUrl/api/user/verify-otp'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'email': email, 'otp': otp}),
       );

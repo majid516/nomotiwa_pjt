@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nomotiwa/core/components/custom_snackbar.dart';
 import 'package:nomotiwa/core/constants/app_theme/app_theme.dart';
 import 'package:nomotiwa/core/screen_size/screen_size.dart';
 import 'package:nomotiwa/features/authentication/services/auth_services.dart';
 import 'package:nomotiwa/features/authentication/view_model/otp_state_provider.dart';
-import 'package:nomotiwa/features/home/screens/home_screen.dart';
+import 'package:nomotiwa/features/home/view/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class SendOTPandLoginButton extends StatelessWidget {
@@ -12,7 +13,7 @@ class SendOTPandLoginButton extends StatelessWidget {
     required this.formKey,
     required this.emailController,
     required this.otpController,
-    required this.otpState
+    required this.otpState,
   });
   final OtpState otpState;
   final GlobalKey<FormState> formKey;
@@ -28,16 +29,14 @@ class SendOTPandLoginButton extends StatelessWidget {
               : () async {
                 if (formKey.currentState!.validate()) {
                   if (!otpState.isOtpSent) {
-                    await context
-                        .read<OtpState>()
-                        .sendOtp(emailController.text);
+                    await context.read<OtpState>().sendOtp(
+                      emailController.text,
+                    );
                   } else {
-                    final success = await context
-                        .read<OtpState>()
-                        .verifyOtp(
-                          emailController.text,
-                          otpController.text,
-                        );
+                    final success = await context.read<OtpState>().verifyOtp(
+                      emailController.text,
+                      otpController.text,
+                    );
                     if (success) {
                       AuthServices().login(emailController.text.trim());
                       if (context.mounted) {
@@ -45,9 +44,15 @@ class SendOTPandLoginButton extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder:
-                                (ctx) => HomeScreen(email: emailController.text.trim()),
+                                (ctx) => HomeScreen(
+                                  email: emailController.text.trim(),
+                                ),
                           ),
                         );
+                      }
+                    } else {
+                      if (context.mounted) {
+                        showCustomSnackBar(context, 'enter valid OTP', true);
                       }
                     }
                   }
