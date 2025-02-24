@@ -15,6 +15,7 @@ class SendOTPandLoginButton extends StatelessWidget {
     required this.otpController,
     required this.otpState,
   });
+
   final OtpState otpState;
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
@@ -25,7 +26,7 @@ class SendOTPandLoginButton extends StatelessWidget {
     return InkWell(
       onTap:
           otpState.isLoading
-              ? null
+              ? null // Disables the button when loading
               : () async {
                 if (formKey.currentState!.validate()) {
                   if (!otpState.isOtpSent) {
@@ -52,7 +53,7 @@ class SendOTPandLoginButton extends StatelessWidget {
                       }
                     } else {
                       if (context.mounted) {
-                        showCustomSnackBar(context, 'enter valid OTP', true);
+                        showCustomSnackBar(context, 'Enter a valid OTP', true);
                       }
                     }
                   }
@@ -66,14 +67,20 @@ class SendOTPandLoginButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
-          child: Text(
-            otpState.isOtpSent ? 'Login' : 'Send OTP',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: MyColors.whiteColor,
-            ),
-          ),
+          child:
+              otpState.isLoading
+                  ? Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: const CircularProgressIndicator(color: Colors.white),
+                  )
+                  : Text(
+                    otpState.isOtpSent ? 'Login' : 'Send OTP',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      color: MyColors.whiteColor,
+                    ),
+                  ),
         ),
       ),
     );
