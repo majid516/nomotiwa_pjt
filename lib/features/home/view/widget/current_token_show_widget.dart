@@ -4,8 +4,10 @@ import 'package:nomotiwa/core/constants/spaces/space.dart';
 import 'package:nomotiwa/features/home/view_model/token_provider.dart';
 import 'package:provider/provider.dart';
 
+
 class CurrentTokenShowWidget extends StatelessWidget {
   const CurrentTokenShowWidget({super.key});
+static int currentDoctorToken = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +16,12 @@ class CurrentTokenShowWidget extends StatelessWidget {
         String displayText = "Consultaion not started";
         RegExp regExp = RegExp(r'currentToken:\s*(\d+)');
         Match? match = regExp.firstMatch(value.tokenMessage);
-
+       
         if (match != null) {
           int token = int.parse(match.group(1)!);
-          displayText = "Current Token: $token";
+          displayText = "Current Token : ";
+          currentDoctorToken = token;
+         
         }
 
         return Container(
@@ -56,6 +60,14 @@ class CurrentTokenShowWidget extends StatelessWidget {
                   ),
                 ],
               ),
+                  Text(
+                 currentDoctorToken.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.primaryColor,
+                    ),
+                  ),
             ],
           ),
         );

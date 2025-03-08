@@ -15,4 +15,5 @@ class Space {
   static const hSpace20 = SizedBox(height: 20);
   static const hSpace25 = SizedBox(height: 25);
   static const hSpace30 = SizedBox(height: 30);
+  static const hSpace500 = SizedBox(height: 500);
 }

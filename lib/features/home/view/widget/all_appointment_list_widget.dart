@@ -9,30 +9,29 @@ class AllAppointmentListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child:
-          doctor.slots.isNotEmpty
-              ? ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                itemCount: doctor.slots.length,
-                itemBuilder: (context, index) {
-                  final slot = doctor.slots[index];
-                  return AppointmentListTileWidget(slot: slot);
-                },
-              )
-              : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.event_busy, size: 64, color: Colors.grey[400]),
-                    const SizedBox(height: 16),
-                    Text(
-                      'No appointments available',
-                      style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
+    return doctor.slots.isNotEmpty
+        ? ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          itemCount: doctor.slots.length,
+          itemBuilder: (context, index) {
+            final slot = doctor.slots[index];
+            return AppointmentListTileWidget(slot: slot);
+          },
+        )
+        : Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.event_busy, size: 64, color: Colors.grey[400]),
+              const SizedBox(height: 16),
+              Text(
+                'No appointments available',
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
-    );
+            ],
+          ),
+        );
   }
 }

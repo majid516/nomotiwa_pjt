@@ -31,7 +31,7 @@ class DoctorBasicDetailsWidget extends StatelessWidget {
                 ),
                 child: HeroAnimatedSecWidget(doctor: doctor),
               ),
-              Space.hSpace15,
+              Space.wSpace15,
               DoctorInfoWidget(doctor: doctor),
             ],
           ),
